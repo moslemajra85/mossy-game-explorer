@@ -19,12 +19,17 @@ const useData = <T>(endpoint: string) => {
 
   useEffect(() => {
     const controller = new AbortController();
+    setIsLoading(true);
     apiClient
       .get<FetchResponse<T>>(endpoint, { signal: controller.signal })
-      .then((res) => setData(res.data.results))
+      .then((res) => {
+        setData(res.data.results);
+        setIsLoading(false);
+      })
       .catch((error) => {
         if (error instanceof CanceledError) return;
         setError(error.message);
+        setIsLoading(false);
       });
 
     return () => {
@@ -32,7 +37,7 @@ const useData = <T>(endpoint: string) => {
     };
   }, []);
 
-  return {data, error, isLoading};
+  return { data, error, isLoading };
 };
 
 export default useData;
