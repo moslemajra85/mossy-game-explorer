@@ -5,15 +5,19 @@ import GameCardSkeleton from './GameCardSkeleton';
 import GameCardContainer from './GameCardContainer';
 import { Genre } from '../hooks/useGenres';
 import { GameQuery } from '../App';
+import AlertMessage from './AlertMessage';
+
 interface Props {
   gameQuery: GameQuery;
-  
 }
 
 const GameGrid = ({ gameQuery }: Props) => {
   let { data, error, isLoading } = useGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6];
 
+  if (error) {
+    return <AlertMessage title="an Error has occured" description={error} />;
+  }
   return (
     <>
       {error && <Text>{error}</Text>}
