@@ -1,6 +1,7 @@
 # Game Explorer
 
-This is a react app that let user explore videos games by enabling them to search all sorts of games by genere, platform , release ...
+This is a react app that let a user explore videos games by enabling them to search video games by genre, platform , release ...
+New Features will be added in the future!
 
 ## Live Demo:
 
